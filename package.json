@@ -1,5 +1,5 @@
 {
-  "name": "filterfind-api",
+  "name": "topictoolkit-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,9 @@
     "db:migrate": "node ./db/migrate build",
     "db:seed": "node ./bin/seed-mock-data",
     "test": "tap -w test/**/*.test.js --reporter=specy",
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js"
+    "start": "node ./",
+    "dev": "fastify start -w -l info -P app.js --port 3002",
+    "start:dev": "nodemon ./"
   },
   "keywords": [],
   "author": "Adam Davis <adam@admataz.com>",
@@ -29,6 +30,7 @@
     "fluent-schema": "^1.0.3",
     "graphql-type-json": "^0.3.1",
     "pg": "^8.2.1",
+    "pino-pretty": "^4.1.0",
     "sql-template-strings": "^2.2.2"
   },
   "devDependencies": {

@@ -1,14 +1,6 @@
 const routeMaster = require('./lib/routemaster')
-// const pageModel = require('./models/page')
 const models = require('./models')
-
-const {
-  PGHOST,
-  PGPORT,
-  PGUSER,
-  PGPASSWORD,
-  PGDATABASE
-} = process.env
+const config = require('./config')
 
 module.exports = function (fastify, opts, next) {
   fastify.register(require('fastify-cors'), {
@@ -16,10 +8,12 @@ module.exports = function (fastify, opts, next) {
   })
 
   fastify.register(require('fastify-postgres'), {
-    connectionString: `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}:${PGPORT}/${PGDATABASE}`
+    connectionString: `postgres://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.database}`
   })
 
   fastify.register(require('fastify-sensible'))
+
+  fastify.register(require('./lib/modelsinfo'), { prefix: '/api' })
 
   models.forEach(model => {
     fastify.register(routeMaster, {
@@ -28,5 +22,7 @@ module.exports = function (fastify, opts, next) {
     })
   })
 
+  // extensions to the standard CRUD in the model
+  fastify.register(require('./api/page'), { prefix: '/api' })
   next()
 }

@@ -1,9 +1,13 @@
-const fastify = require('fastify')({ logger: true })
+const fastify = require('fastify')({
+  logger: { prettyPrint: true },
+  ignoreTrailingSlash: true
+})
 const app = require('./app')
+const config = require('./config')
 
 fastify.register(app)
 
-fastify.listen(3000, function (err, address) {
+fastify.listen(config.api.port, function (err, address) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
