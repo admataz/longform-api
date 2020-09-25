@@ -2,7 +2,6 @@ require('dotenv').config()
 
 const config = {
   api: {
-    host: process.env.HOST,
     port: process.env.PORT,
     logLevel: process.env.LOG_LEVEL
   },
