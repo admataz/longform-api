@@ -8,11 +8,11 @@ const migrate = async () => {
     const postgress = await new Postgrator({
       migrationDirectory: `${__dirname}/migrations/${action}`,
       driver: 'pg',
-      host: process.env.PGHOST,
-      port: process.env.PGPORT,
-      database: process.env.PGDATABASE,
-      username: process.env.PGUSER,
-      password: process.env.PGPASSWORD,
+      host: process.env.RDS_HOSTNAME,
+      port: process.env.RDS_PORT,
+      database: process.env.RDS_DB_NAME,
+      username: process.env.RDS_USERNAME,
+      password: process.env.RDS_PASSWORD,
       schemaTable: `schemaversion_${action}`
     })
     const appliedMigrations = await postgress.migrate()
