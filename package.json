@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {"node": "~12.0.0"},
   "scripts": {
     "db:migrate": "node ./db/migrate build",
     "db:seed": "node ./bin/seed-mock-data",
@@ -32,6 +31,7 @@
     "graphql-type-json": "^0.3.2",
     "pg": "^8.3.3",
     "pino-pretty": "^4.2.1",
+    "postgrator": "^4.0.1",
     "sql-template-strings": "^2.2.2"
   },
   "devDependencies": {
@@ -43,7 +43,6 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "faker": "^4.1.0",
-    "postgrator": "^4.0.1",
     "request": "^2.88.2",
     "tap": "^14.10.8"
   }
