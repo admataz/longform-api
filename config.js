@@ -1,16 +1,32 @@
 require('dotenv').config()
 
+const {
+  PORT,
+  LOG_LEVEL,
+  HOST,
+  RDS_HOSTNAME,
+  RDS_PORT,
+  RDS_USERNAME,
+  RDS_PASSWORD,
+  RDS_DB_NAME,
+  DATABASE_URL
+} = process.env
+
 const config = {
   api: {
-    port: process.env.PORT,
-    logLevel: process.env.LOG_LEVEL
+    port: PORT,
+    logLevel: LOG_LEVEL,
+    host: HOST
   },
   db: {
-    host: process.env.RDS_HOSTNAME,
-    port: process.env.RDS_PORT,
-    user: process.env.RDS_USERNAME,
-    password: process.env.RDS_PASSWORD,
-    database: process.env.RDS_DB_NAME
+    host: RDS_HOSTNAME,
+    port: RDS_PORT,
+    user: RDS_USERNAME,
+    password: RDS_PASSWORD,
+    database: RDS_DB_NAME,
+    databaseUrl:
+      DATABASE_URL ||
+      `postgres://${RDS_USERNAME}:${RDS_PASSWORD}@${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}`
   }
 }
 

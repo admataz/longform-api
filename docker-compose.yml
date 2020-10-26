@@ -1,17 +1,39 @@
 version: '3'
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./:/usr/src/app
+    command: npm run dev
+    environment:
+      PORT: "${PORT}"
+      HOST: "${HOST}"
+      RDS_HOSTNAME: "postgres" # refer to the docker service
+      RDS_PORT: "5432"
+      RDS_USERNAME: "${RDS_USERNAME}"
+      RDS_PASSWORD: "${RDS_PASSWORD}"
+      RDS_DB_NAME: "${RDS_DB_NAME}"
+      LOG_LEVEL: "${LOG_LEVEL}"
   postgres:
     image: postgres:alpine
     restart: "no"
     ports:
-      - "${PGPORT}:5432"
+      - "${RDS_PORT}:5432"
     volumes:
       - longformdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: "${PGPASSWORD}"
-      POSTGRES_USER: "${PGUSER}"
-      POSTGRES_DB: "${PGDATABASE}"
+      POSTGRES_PASSWORD: "${RDS_PASSWORD}"
+      POSTGRES_USER: "${RDS_USERNAME}"
+      POSTGRES_DB: "${RDS_DB_NAME}"
       PGDATA: /var/lib/postgresql/data/pgdata
 
 volumes:

@@ -1,0 +1,7 @@
+.ebextensions
+bin
+node_modules
+.env
+.eslintrc.js
+.gitignore
+
