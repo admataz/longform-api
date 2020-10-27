@@ -10,6 +10,7 @@ const migrate = async () => {
       connectionString: config.db.databaseUrl,
       migrationDirectory: `${__dirname}/migrations/${action}`,
       driver: 'pg',
+      ssl: true,
       // host: process.env.RDS_HOSTNAME,
       // port: process.env.RDS_PORT,
       // database: process.env.RDS_DB_NAME,
