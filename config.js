@@ -9,14 +9,16 @@ const {
   RDS_USERNAME,
   RDS_PASSWORD,
   RDS_DB_NAME,
-  DATABASE_URL
+  DATABASE_URL,
+  API_PREFIX
 } = process.env
 
 const config = {
   api: {
     port: PORT,
     logLevel: LOG_LEVEL,
-    host: HOST
+    host: HOST,
+    prefix: API_PREFIX || ''
   },
   db: {
     host: RDS_HOSTNAME,

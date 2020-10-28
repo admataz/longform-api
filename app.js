@@ -12,16 +12,21 @@ module.exports = function (fastify, opts, next) {
   })
 
   fastify.register(require('fastify-sensible'))
-  fastify.register(require('./lib/modelsinfo'), { prefix: '/api' })
+  fastify.register(require('./lib/modelsinfo'), { prefix: config.api.prefix })
+  fastify.register(require('./api/health'))
 
-  models.forEach(model => {
+  models.forEach((model) => {
     fastify.register(routeMaster, {
-      prefix: '/api',
+      prefix: config.api.prefix,
       routemaster: { model }
     })
   })
 
   // extensions to the standard CRUD in the model
-  fastify.register(require('./api/page'), { prefix: '/api' })
+  fastify.register(require('./api/page'), {
+    prefix: config.api.prefix
+  })
+
+
   next()
 }
