@@ -19,7 +19,7 @@
     "apollo-server-fastify": "^2.18.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
-    "fastify": "^3.4.1",
+    "fastify": "^3.29.4",
     "fastify-autoload": "^3.1.0",
     "fastify-cli": "^2.2.0",
     "fastify-cors": "^4.1.0",
